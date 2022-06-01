@@ -1,3 +1,12 @@
+# =======================================================
+# NAME: GetVmPrivateIp.ps1
+# AUTHOR: FAVROT, Jean-Baptiste, Entreprise
+# DATE: 31/05/2022
+#
+# Lists all VMs with corresponding private IPs
+#
+# =======================================================
+
 $vms = get-azvm
 $nics = get-aznetworkinterface | where VirtualMachine -NE $null #skip Nics with no VM
 

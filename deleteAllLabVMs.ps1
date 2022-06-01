@@ -8,8 +8,6 @@
 # =======================================================
 
 
-#A valider
-
 param ([Parameter(Mandatory)][ValidatePattern('\/subscriptions\/[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}\/resourcegroups\/[a-z_\-.()]{1,90}\/providers\/microsoft.devtestlab\/labs\/[a-z_\-.()]{1,90}')][string]$LabResourceId)
 
 $lab = Get-AzResource -ResourceId $LabResourceId 
