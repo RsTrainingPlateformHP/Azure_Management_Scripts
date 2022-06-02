@@ -23,4 +23,4 @@ function GetPublicIP ($VMName) {
          }
 }
 
-GetPublicIP($VMName) | Out-File -FilePath ".\$OutputName).csv" -NoClobber
+GetPublicIP($VMName) | Out-File -FilePath ".\$OutputName.csv" -NoClobber
