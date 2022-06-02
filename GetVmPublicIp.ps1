@@ -7,8 +7,11 @@
 #
 # =======================================================
 
-param ([string]$VMName)
-param ([string][Parameter(Mandatory)]$OutputName)
+param 
+(
+     [string]$VMName
+     [string][Parameter(Mandatory)]$OutputName
+)
 
 function GetPublicIP ($VMName) {
      $publicIPs = Get-AzPublicIpAddress | where-object -Property Name -Match "$VMName"
