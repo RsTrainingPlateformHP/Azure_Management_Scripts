@@ -1,2 +1,3 @@
 - Démarrer toutes les VM d'un DevTest Lab
-- 
+- Vérifier les RG où la endDate a dépassé la date indiquée (RG plus nom de l'Owner pour contact en output)
+- Modifier la endDate de toutes les ressources d'un RG

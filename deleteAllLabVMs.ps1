@@ -1,5 +1,5 @@
 # =======================================================
-# NAME: deleteAllLabVM.ps1
+# NAME: deleteAllLabVMs.ps1
 # AUTHOR: FAVROT, Jean-Baptiste, Entreprise
 # DATE: 31/05/2022
 #

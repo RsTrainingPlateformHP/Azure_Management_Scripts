@@ -7,10 +7,17 @@
 #
 # =======================================================
 
-param ($VMName)
+param ([string]$VMName)
+param ([string][Parameter(Mandatory)]$OutputName)
 
-$publicIPs = Get-AzPublicIpAddress | where-object -Property Name -Match "$VMName"
+function GetPublicIP ($VMName) {
+     $publicIPs = Get-AzPublicIpAddress | where-object -Property Name -Match "$VMName"
 
-foreach($publicIP in $publicIPs) {
-     Write-Output "$($publicIP.ResourceGroupName) - $($publicIP.Name) : $($publicIP.IpAddress)"
-    }
+     Write-Output 'Resource Group,Public IP Name,Public IP Address'
+     
+     foreach($publicIP in $publicIPs) {
+          Write-Output "$($publicIP.ResourceGroupName),$($publicIP.Name),$($publicIP.IpAddress)"
+         }
+}
+
+GetPublicIP($VMName) | Out-File -FilePath ".\$OutputName).csv" -NoClobber
