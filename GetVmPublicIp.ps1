@@ -9,7 +9,7 @@
 
 param 
 (
-     [string]$VMName
+     [string]$VMName,
      [string][Parameter(Mandatory)]$OutputName
 )
 
