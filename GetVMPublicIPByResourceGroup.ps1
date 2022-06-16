@@ -14,17 +14,17 @@ param
 )
 
 function GetPublicIP ($ResourceGroupNameSearch) {
-    $resourceGroups = Get-AzResourceGroup | where-object -Property Name -Match "$ResourceGroupNameSearch"
+     $resourceGroups = Get-AzResourceGroup | where-object -Property ResourceGroupName -Match "$ResourceGroupNameSearch"
     
-    foreach($ResourceGroup in $resourceGroups) {
+     foreach($ResourceGroup in $resourceGroups) {
 
-    $publicIPs = Get-AzPublicIpAddress -ResourceGroupName $ResourceGroup.ResourceGroupName
-    $StringOutput = "$($ResourceGroup.ResourceGroupName)"
+     $publicIPs = Get-AzPublicIpAddress -ResourceGroupName $ResourceGroup.ResourceGroupName
+     $StringOutput = "$($ResourceGroup.ResourceGroupName)"
      
-    foreach($publicIP in $publicIPs) {
-            $StringOutput = "$StringOutput,$($publicIP.IpAddress)"
-         }
-    Write-Output $StringOutput
+     foreach($publicIP in $publicIPs) {
+          $StringOutput = "$StringOutput,$($publicIP.IpAddress)"
+          }
+     Write-Output $StringOutput
      }
 }
 
