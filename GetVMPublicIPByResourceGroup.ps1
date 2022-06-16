@@ -22,7 +22,7 @@ function GetPublicIP ($ResourceGroupNameSearch) {
      $StringOutput = "$($ResourceGroup.ResourceGroupName)"
      
      foreach($publicIP in $publicIPs) {
-          $StringOutput = "$StringOutput,$($publicIP.IpAddress)"
+          $StringOutput = "$StringOutput,$($publicIP.name),$($publicIP.IpAddress)"
           }
      Write-Output $StringOutput
      }
