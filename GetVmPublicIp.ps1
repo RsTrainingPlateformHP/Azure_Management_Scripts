@@ -5,6 +5,8 @@
 #
 # Lists all VMs with corresponding public IPs. Takes a string with the name of the VMs you want to match in input
 #
+# Usage : ./GetVmPublicIp.ps1 "splunk" "splunkPubIps" --> output : splunkPubIps.csv
+#
 # =======================================================
 
 param 
