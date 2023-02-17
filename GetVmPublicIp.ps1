@@ -27,6 +27,6 @@ function GetPublicIP ($VMName) {
 
 $ipslist = GetPublicIP($VMName)
 
-write-host $ipslist
-
 $ipslist | Out-File -FilePath ".\$OutputName.csv" -NoClobber
+
+cat "$OutputName.csv"
