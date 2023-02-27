@@ -4,9 +4,9 @@
 # DATE: 27/02/2023
 # =======================================================
 
-#
-# Add tags associated for contact
-#
+# Improvments
+# [x] Add tags associated for contact
+# [ ] Exclude devtestlab resources
 
 $vmliststatus = @()
 
