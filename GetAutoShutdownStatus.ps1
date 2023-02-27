@@ -17,10 +17,6 @@ foreach ($vm in Get-AzVm){
                 -ResourceId "/subscriptions/$subscriptionId/resourceGroups/$($vm.ResourceGroupName)/providers/microsoft.devtestlab/schedules/shutdown-computevm-$($vm.Name)" `
                 -ErrorAction Stop
 
-        if ($vm.Tags -like "*hidden-DevTestLabs-LogicalResourceUId*" ){
-            write-host "catch devtestlab"
-        }
-
         $vmliststatus += New-Object psobject -Property @{
                 "VMName" = $vm.Name
                 "ShutdownStatus" = $shutdownResource.Properties.status
