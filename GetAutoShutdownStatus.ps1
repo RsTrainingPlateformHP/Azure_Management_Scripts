@@ -21,7 +21,7 @@ foreach ($vm in Get-AzVm){
     catch {
         $vmliststatus += New-Object psobject -Property @{
                 "VMName" = $vm.Name
-                "ShutdownStatus" = "Not existing"
+                "ShutdownStatus" = "Not configured"
         }
 
     }
