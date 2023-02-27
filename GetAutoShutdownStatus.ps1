@@ -17,7 +17,7 @@ foreach ($vm in Get-AzVm){
                 -ResourceId "/subscriptions/$subscriptionId/resourceGroups/$($vm.ResourceGroupName)/providers/microsoft.devtestlab/schedules/shutdown-computevm-$($vm.Name)" `
                 -ErrorAction Stop
 
-        if ($vm.Tags -contains "hidden-DevTestLabs-LogicalResourceUId" ){
+        if ($vm.Tags -like "*hidden-DevTestLabs-LogicalResourceUId*" ){
             write-host "catch devtestlab"
         }
 
