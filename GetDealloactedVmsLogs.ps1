@@ -7,16 +7,13 @@
 
 $LogsReport = @()
 $MonthAgoDdate = (Get-Date).AddMonths(-1)
-$vms = Get-AzureRmVm
+$vms = Get-AzVM -ODataQuery "name ne '*training*labs*'"
 $counter=0
 foreach($vm in $vms)
 {
     $counter++
     write-progress -Activity 'Processing Vms' -Status "Processing $($counter) of $($vms.count) - ($($vm.Name))" -CurrentOperation $vm -PercentComplete (($counter / $vms.count)*100)
-    if ($vm.Name.ToLower() -like "*training*labs*")
-    {
-        continue
-    }else{
+    
     $logs = Get-AzLog -StartTime $MonthAgoDdate -DetailedOutput -ResourceId $vm.Id -WarningAction 0| Where-Object {$_.Authorization.Action -like 'Microsoft.Compute/virtualMachines/deallocate/action*'}
     foreach ($log in $logs)
     {
@@ -32,10 +29,11 @@ foreach($vm in $vms)
 
         }
     }
-    }
-    
 }
+    
+
 
 $LogsReport = $LogsReport | Select-Object -Property *, @{Name="Hash";Expression={$_ | Out-String}} | Sort-Object -Property Hash -Unique | Select-Object -Property * -ExcludeProperty Hash
 $nowDate = Get-Date -Format "dd-MM-yyyy"
+write-host $LogsReport
 $LogsReport | Export-Csv "report-$nowDate.csv"
