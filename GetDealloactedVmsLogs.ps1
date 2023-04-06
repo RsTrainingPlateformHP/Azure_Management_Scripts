@@ -30,7 +30,6 @@ foreach($vm in $vms)
         }
     }
 }
-    
 
 
 $LogsReport = $LogsReport | Select-Object -Property *, @{Name="Hash";Expression={$_ | Out-String}} | Sort-Object -Property Hash -Unique | Select-Object -Property * -ExcludeProperty Hash
