@@ -40,7 +40,10 @@ foreach($vm in $vms)
     
 }
 
+write-host "param " $show
+
 if($show){
+    write-host "Yes optional argument"
     $LogsReport
 }
 
