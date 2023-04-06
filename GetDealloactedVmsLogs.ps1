@@ -35,5 +35,4 @@ foreach($vm in $vms)
 
 $LogsReport = $LogsReport | Select-Object -Property *, @{Name="Hash";Expression={$_ | Out-String}} | Sort-Object -Property Hash -Unique | Select-Object -Property * -ExcludeProperty Hash
 $nowDate = Get-Date -Format "dd-MM-yyyy"
-$LogsReport
 $LogsReport | Export-Csv "report-$nowDate.csv"
