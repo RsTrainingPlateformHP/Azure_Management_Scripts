@@ -7,7 +7,7 @@
 
 $LogsReport = @()
 $MonthAgoDdate = (Get-Date).AddMonths(-1)
-$vms = Get-AzVM -ODataQuery "name ne '*training*labs*'"
+$vms = Get-AzureRmVm | Where-Object { $_.Name -notlike "*training*labs*" }
 $counter=0
 foreach($vm in $vms)
 {
