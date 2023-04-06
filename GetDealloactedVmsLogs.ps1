@@ -3,6 +3,11 @@
 # AUTHOR: LEGOUPIL, Clement, Entreprise
 # DATE: 10/02/2023
 # =======================================================
+[CmdletBinding()]
+param(
+    [Parameter(Mandatory=$false)]
+    [string]$show
+)
 
 $LogsReport = @()
 $MonthAgoDdate = (Get-Date).AddMonths(-1)
@@ -33,6 +38,10 @@ foreach($vm in $vms)
     }
     }
     
+}
+
+if($show){
+    $LogsReport
 }
 
 $nowDate = Get-Date -Format "dd-MM-yyyy"
