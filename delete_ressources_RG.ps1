@@ -32,7 +32,7 @@ if ($continue -eq "Oui") {
 # Parcourir chaque groupe de ressources et supprimer toutes les ressources
 foreach ($resourceGroupName in $resourceGroupNames) {
 
-    Write-Host "RG is: $resourceGroupName"
+    Write-Host $resourceGroupName.ResourceGroupName
 
     # Récupérer toutes les ressources du groupe de ressources
     $resources = Get-AzResource -ResourceGroupName $resourceGroupName
