@@ -17,7 +17,12 @@ param(
 # Récupération des RG
 $resourceGroups = Get-AzResourceGroup | Select-Object ResourceGroupName
 $ressourceGroupNames = $resourceGroups | Where-Object { $_.ResourceGroupName -match $args1 }
+
+Write-Host "test"
 $ressourceGroupNames.ResourceGroupName
+Write-Host "test1"
+Write-Host $ressourceGroupNames
+Write-Host "test2"
 
 # On check les RG et on Continue/Stop le script
 $continue = Read-Host "Voulez-vous bien supprimer les ressources des RG suivants: $ressourceGroupNames (Oui / Non)"
