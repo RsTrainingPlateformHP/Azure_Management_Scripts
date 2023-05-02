@@ -4,26 +4,20 @@
 # AUTHOR: PRODHOMME, Romaric, Entreprise
 # DATE: 25/04/2023
 #
-# Takes ressources group in input and delete all the 
-# ressources inside this RG. You can select as many RG 
-# as you want
+# Prend une regex en paramètre
+# récupère tous les noms de RG correspondant à la regex
+# supprime toutes les ressources des RG et les RG
 #
 # =======================================================
-
 
 param(
     [string]$args1
 )
 
-Write-Host "Args1: $args1"
-
-# Récupération des RG à supprimer
+# Récupération des RG
 $resourceGroups = Get-AzResourceGroup | Select-Object ResourceGroupName
-$regex = $args1
-$filteredResourceGroups = $resourceGroups | Where-Object { $_.ResourceGroupName -match $regex }
-$filteredResourceGroups.ResourceGroupName
-
-$ressourceGroupNames = $filteredResourceGroups
+$ressourceGroupNames = $resourceGroups | Where-Object { $_.ResourceGroupName -match $args1 }
+$ressourceGroupNames.ResourceGroupName
 
 # On check les RG et on Continue/Stop le script
 $continue = Read-Host "Voulez-vous bien supprimer les ressources des RG suivants: $ressourceGroupNames (Oui / Non)"
