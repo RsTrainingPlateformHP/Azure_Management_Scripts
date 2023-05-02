@@ -38,7 +38,7 @@ if ($continue -eq "Oui") {
 }
 
 # Parcourir chaque groupe de ressources et supprimer toutes les ressources
-foreach ($resourceGroupName in $resourceGroupNames) {
+foreach ($resourceGroupName in $ressourceGroupNames) {
     # Récupérer toutes les ressources du groupe de ressources
     $resources = Get-AzResource -ResourceGroupName $resourceGroupName
 
