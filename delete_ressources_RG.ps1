@@ -6,7 +6,7 @@
 #
 # Prend une regex en paramètre
 # récupère tous les noms de RG correspondant à la regex
-# supprime toutes les ressources des RG et les RG
+# supprime toutes les ressources des RG
 #
 # =======================================================
 
@@ -37,7 +37,4 @@ foreach ($resourceGroupName in $resourceGroupNames) {
     foreach ($resource in $resources) {
         Remove-AzResource -ResourceId $resource.ResourceId -Force
     }
-
-    # Supprimer le groupe de ressources
-    Remove-AzResourceGroup -Name $resourceGroupName -Force
 }
