@@ -35,7 +35,7 @@ foreach ($resourceGroupName in $resourceGroupNames) {
     Write-Host $resourceGroupName.ResourceGroupName
 
     # Récupérer toutes les ressources du groupe de ressources
-    $resources = Get-AzResource -ResourceGroupName $resourceGroupName
+    $resources = Get-AzResource -ResourceGroupName $resourceGroupName.ResourceGroupName
 
     # Supprimer chaque ressource
     foreach ($resource in $resources) {
