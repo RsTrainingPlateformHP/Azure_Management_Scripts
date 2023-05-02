@@ -19,7 +19,7 @@ $resourceGroups = Get-AzResourceGroup | Select-Object ResourceGroupName
 $resourceGroupNames = $resourceGroups | Where-Object { $_.ResourceGroupName -match $args1 }
 
 Write-Host "Liste des RG ou les ressources seront supprimés:"
-Write-Host $resourceGroupNames.resourceGroupNames
+$resourceGroupNames.resourceGroupNames
 
 # On check les RG et on Continue/Stop le script
 $continue = Read-Host "Etes vous d'accord: OUI | NON"
