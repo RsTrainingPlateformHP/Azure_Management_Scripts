@@ -18,16 +18,6 @@ param(
 $resourceGroups = Get-AzResourceGroup | Select-Object ResourceGroupName
 $resourceGroupNames = $resourceGroups | Where-Object { $_.ResourceGroupName -match $args1 }
 
-Write-Host "test"
-$resourceGroupNames.ResourceGroupName
-Write-Host "test1"
-Write-Host $resourceGroupNames
-Write-Host "test2"
-foreach ($resourceGroupName in $resourceGroupNames) {
-    Write-Host "RG_$resourceGroupName"
-}
-Write-Host "Fin de test"
-
 # On check les RG et on Continue/Stop le script
 $continue = Read-Host "Voulez-vous bien supprimer les ressources des RG suivants: $resourceGroupNames (Oui / Non)"
 if ($continue -eq "Oui") {
@@ -39,6 +29,9 @@ if ($continue -eq "Oui") {
 
 # Parcourir chaque groupe de ressources et supprimer toutes les ressources
 foreach ($resourceGroupName in $resourceGroupNames) {
+
+    Write-Host "RG is: $resourceGroupName"
+
     # Récupérer toutes les ressources du groupe de ressources
     $resources = Get-AzResource -ResourceGroupName $resourceGroupName
 
