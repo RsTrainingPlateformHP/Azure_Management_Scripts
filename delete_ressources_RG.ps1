@@ -23,6 +23,10 @@ $ressourceGroupNames.ResourceGroupName
 Write-Host "test1"
 Write-Host $ressourceGroupNames
 Write-Host "test2"
+foreach ($resourceGroupName in $resourceGroupNames) {
+    Write-Host "RG_$ressourceGroupNames"
+}
+Write-Host "Fin de test"
 
 # On check les RG et on Continue/Stop le script
 $continue = Read-Host "Voulez-vous bien supprimer les ressources des RG suivants: $ressourceGroupNames (Oui / Non)"
@@ -40,6 +44,7 @@ foreach ($resourceGroupName in $resourceGroupNames) {
 
     # Supprimer chaque ressource
     foreach ($resource in $resources) {
+        Write-Host "Ma ressource est: $resource"
         Remove-AzResource -ResourceId $resource.ResourceId -Force
     }
 }
