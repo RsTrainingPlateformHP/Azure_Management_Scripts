@@ -30,10 +30,21 @@ if ($continue -eq "OUI") {
     exit 1
 }
 
-# Parcourir chaque groupe de ressources et supprimer toutes les ressources
+# On commence par supprimer les vms avant les autres services pour éviter les erreurs
 foreach ($resourceGroupName in $resourceGroupNames) {
+    
+    # On récupère toutes les VM du RG
+    $vms = Get-AzVM -ResourceGroupName $resourceGroupName
 
-    Write-Host $resourceGroupName.ResourceGroupName
+    # On les arrête toute et on les supprime
+    foreach ($vm in $vms) {
+        Stop-AzVM -ResourceGroupName $resourceGroupName -Name $vm.Name -Force
+        Remove-AzVM -ResourceGroupName $resourceGroupName -Name $vm.Name -Force
+    }
+}
+
+# Parcourir chaque groupe de ressources pour supprimer le reste des ressources
+foreach ($resourceGroupName in $resourceGroupNames) {
 
     # Récupérer toutes les ressources du groupe de ressources
     $resources = Get-AzResource -ResourceGroupName $resourceGroupName.ResourceGroupName
