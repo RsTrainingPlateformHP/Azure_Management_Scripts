@@ -33,15 +33,6 @@ if ($continue -eq "OUI") {
 # Parcourir chaque groupe de ressources pour supprimer les ressources
 foreach ($resourceGroupName in $resourceGroupNames) {
 
-    # On récupère toutes les VM du RG pour les supprimer en premier (éviter les erreurs)
-    $vms = Get-AzVM -ResourceGroupName $resourceGroupName.ResourceGroupName
-
-    # On les arrête toute et on les supprime
-    foreach ($vm in $vms) {
-        Stop-AzVM -ResourceGroupName $resourceGroupName -Name $vm.Name -Force
-        Remove-AzVM -ResourceGroupName $resourceGroupName -Name $vm.Name -Force
-    }
-
     # Récupérer toutes les ressources du groupe de ressources
     $resources = Get-AzResource -ResourceGroupName $resourceGroupName.ResourceGroupName
 
