@@ -18,12 +18,15 @@ $resources = Get-AzResource
 foreach ($resource in $resources) {
     $tags = $resource.Tags
     if ($tags -ne $null -and $tags.ContainsKey("endDate")) {
-        $endDate = [DateTime]::Parse($tags["endDate"])
-        if ($endDate -lt [DateTime]::Now) {
-            # La balise "endDate" est dépassée
-            $resourceGroup = $resource.ResourceGroupName
-            $owner = $tags["owner"]
-            Write-Host "Ressource dépassée: $($resource.Name), Groupe de ressources: $($resourceGroup), Owner: $($owner)"
+        $endDateString = $tags["endDate"]
+        if ([DateTime]::TryParse($endDateString, [ref]$endDate)) {
+            if ($endDate -lt [DateTime]::Now) {
+                # La balise "endDate" est dépassée
+                $resourceGroup = $resource.ResourceGroupName
+                $owner = $tags["owner"]
+                $endDateFormatted = $endDate.ToString("yyyy-MM-dd")
+                Write-Host "Ressource dépassée: $($resource.Name), Groupe de ressources: $($resourceGroup), Owner: $($owner), Date de fin: $($endDateFormatted)"
+            }
         }
     }
 }
