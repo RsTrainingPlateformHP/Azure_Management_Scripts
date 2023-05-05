@@ -4,15 +4,12 @@
 # AUTHOR: PRODHOMME, Romaric, Entreprise
 # DATE: 25/04/2023
 #
-# Prend une regex en paramètre
-# récupère tous les noms de RG correspondant à la regex
-# supprime toutes les ressources des RG
+# Check toutes les ressources dans Azure pour regarder
+# la endDate. Si elle est dépassé on retourne le 
+# nom de ressource, groupe de ressourde et owner
 #
 # =======================================================
 
-param(
-    [string]$args1
-)
 
 # Récupérer toutes les ressources dans votre abonnement Azure
 $resources = Get-AzResource
