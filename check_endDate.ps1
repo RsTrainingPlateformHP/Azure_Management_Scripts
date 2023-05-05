@@ -19,6 +19,7 @@ foreach ($resource in $resources) {
     $tags = $resource.Tags
     if ($tags -ne $null -and $tags.ContainsKey("endDate")) {
         $endDateString = $tags["endDate"]
+        $endDate = $null
         if ([DateTime]::TryParse($endDateString, [ref]$endDate)) {
             if ($endDate -lt [DateTime]::Now) {
                 # La balise "endDate" est dépassée
