@@ -14,7 +14,7 @@ foreach ($rg in $rgs){
         
         $rgTags += New-Object psobject -Property @{
             "RgName" = $rg.ResourceGroupName
-            "Owner"  = $tags.Properties.owner
+            "Owner"  = $tags.Properties.TagsProperty.owner
             "Tags"   = $tags.Properties.TagsProperty
         }
     }else{
