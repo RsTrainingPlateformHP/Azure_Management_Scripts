@@ -11,10 +11,9 @@ foreach ($rg in $rgs){
 
     $tags = Get-AzTag -ResourceId $rg.ResourceId
     if ($tags) {
-        write-host $tags.Properties.TagsProperty
         $rgTags += New-Object psobject -Property @{
             "RgName" = $rg.Name
-            "Tags"   = $tags
+            "Tags"   = $tags.Properties.TagsProperty
         }
     }else{
     $rgTags += New-Object psobject -Property @{
