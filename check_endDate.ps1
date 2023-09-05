@@ -20,8 +20,8 @@ foreach ($resource in $resources) {
     if ($tags -ne $null -and $tags.ContainsKey("endDate")) {
         $endDateString = $tags["endDate"]
         $endDate = $null
-        if ([DateTime]::TryParse($endDateString, [ref]$endDate)) {
-            if ($endDate -lt [DateTime]::Now) {
+        if ([DateTime]::TryParse($endDateString, [ref]$endDateString)) {
+            if ($endDateString -lt [DateTime]::Now) {
                 # La balise "endDate" est dépassée
                 $resourceGroup = $resource.ResourceGroupName
                 $owner = $tags["owner"]
