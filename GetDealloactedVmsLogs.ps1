@@ -39,6 +39,7 @@ foreach($vm in $vms)
                     "VMSize" = $vm.HardwareProfile.VmSize
                     "OperationName" = "No logs from more than 1 month"
                     "LogTimeStamp" = "30d+"
+                }
     }
 }
 
