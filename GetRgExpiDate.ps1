@@ -19,7 +19,7 @@ foreach ($rg in $rgs){
         }
     }else{
     $rgTags += New-Object psobject -Property{
-        "RgName" = $rg.Name
+        "RgName" = "Name"
         "Tags"   = "None"
     
     }  
