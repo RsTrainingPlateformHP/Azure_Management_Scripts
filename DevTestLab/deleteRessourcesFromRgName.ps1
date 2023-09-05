@@ -38,6 +38,6 @@ foreach ($resourceGroupName in $resourceGroupNames) {
 
     # Supprimer chaque ressource
     foreach ($resource in $resources) {
-        Remove-AzResource -ResourceId $resource.ResourceId -Force
+        Remove-AzResource -ResourceId $resource.ResourceId -Force -asjob
     }
 }
