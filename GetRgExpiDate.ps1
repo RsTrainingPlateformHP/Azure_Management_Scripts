@@ -3,6 +3,9 @@
 # AUTHOR: LEGOUPIL, Clement, Entreprise
 # DATE: 13/02/2023
 # =======================================================
+param(
+    [string]$arg1
+)
 
 $rgs = Get-AzResourceGroup
 $rgTags = @()
@@ -31,4 +34,8 @@ foreach ($rg in $rgs){
 }
 }
 
-$rgTags | Select-Object -Property RgName, Owner, Approver, EndDate
+if ($arg1 -eq "CSV"){
+
+}else{
+    $rgTags | Select-Object -Property RgName, Owner, Approver, EndDate
+}
