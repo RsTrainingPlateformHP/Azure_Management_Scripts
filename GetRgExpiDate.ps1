@@ -36,6 +36,7 @@ foreach ($rg in $rgs){
 
 if ($arg1 -eq "CSV"){
     $rgTags | Export-Csv "report-RgtTags-$nowDate.csv"
+    write-Host "File created : report-RgTags-$nowDate.csv"
 }else{
     $rgTags | Select-Object -Property RgName, Owner, Approver, EndDate
 }
