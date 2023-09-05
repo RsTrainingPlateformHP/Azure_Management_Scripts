@@ -10,7 +10,6 @@ $rgTags = @()
 foreach ($rg in $rgs){
 
     $tags = Get-AzTag -ResourceId $rg.ResourceId
-    write-Host $rg
     if ($tags) {
         write-host $tags.Properties.TagsProperty
         $rgTags += New-Object psobject -Property @{
@@ -25,3 +24,5 @@ foreach ($rg in $rgs){
     }  
 }
 }
+
+$rgTags
