@@ -9,7 +9,7 @@ $rgTags = @()
 
 foreach ($rg in $rgs){
 
-    $tags = Get-AzTag -ResourceId $rg.Id
+    $tags = Get-AzTag -ResourceId $rg.ResourceId
     write-Host $rg
     if ($tags) {
         write-host $tags.Properties.TagsProperty
