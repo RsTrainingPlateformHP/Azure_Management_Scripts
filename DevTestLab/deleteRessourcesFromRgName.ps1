@@ -18,15 +18,15 @@ param(
 $resourceGroups = Get-AzResourceGroup | Select-Object ResourceGroupName
 $resourceGroupNames = $resourceGroups | Where-Object { $_.ResourceGroupName -match $args1 }
 
-Write-Host "Liste des RG ou les ressources seront supprimés:"
+Write-Host "Resource Groups that will be deleted:"
 $resourceGroupNames.ResourceGroupName
 
 # On check les RG et on Continue/Stop le script
-$continue = Read-Host "Etes vous d'accord: OUI | NON"
-if ($continue -eq "OUI") {
-    Write-Host "Continuer..."
+$continue = Read-Host "Are you sure ? Yes | No"
+if ($continue -eq "Yes") {
+    Write-Host "Continue..."
 } else {
-    Write-Host "Arrêter."
+    Write-Host "Exit."
     exit 1
 }
 
