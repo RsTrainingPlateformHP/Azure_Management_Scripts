@@ -3,7 +3,9 @@
 # AUTHOR: LEGOUPIL, Clement, Entreprise
 # DATE: 10/02/2023
 # =======================================================
-
+param(
+    [string]$args1
+)
 
 $LogsReport = @()
 $MonthAgoDdate = (Get-Date).AddMonths(-1)
@@ -34,4 +36,10 @@ foreach($vm in $vms)
 
 $LogsReport = $LogsReport | Select-Object -Property *, @{Name="Hash";Expression={$_ | Out-String}} | Sort-Object -Property Hash -Unique | Select-Object -Property * -ExcludeProperty Hash
 $nowDate = Get-Date -Format "dd-MM-yyyy"
-$LogsReport | Export-Csv "report-$nowDate.csv"
+if ($args1 -eq "CSV")
+{
+    $LogsReport | Export-Csv "report-$nowDate.csv"
+}else{
+    $LogsReport
+}
+
