@@ -13,13 +13,13 @@ foreach ($rg in $rgs){
     write-Host $rg
     if ($tags) {
         write-host $tags.Properties.TagsProperty
-        $rgTags += New-Object psobject -Property {
-            "RgName" = "Name"
+        $rgTags += New-Object psobject -Property @{
+            "RgName" = $rg.Name
             "Tags"   = $tags
         }
     }else{
-    $rgTags += New-Object psobject -Property{
-        "RgName" = "Name"
+    $rgTags += New-Object psobject -Property @{
+        "RgName" = $rg.Name
         "Tags"   = "None"
     
     }  
