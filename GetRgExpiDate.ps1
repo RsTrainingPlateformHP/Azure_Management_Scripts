@@ -7,6 +7,7 @@ param(
     [string]$arg1
 )
 
+$nowDate = Get-Date -Format "dd-MM-yyyy"
 $rgs = Get-AzResourceGroup
 $rgTags = @()
 
