@@ -15,7 +15,7 @@ param(
 )
 
 # Récupération des RG
-$resourceGroups = Get-AzResourceGroup | Select-Object ResourceGroupName
+$resourceGroups = Get-AzResourceGroup | Select-Object -Like ResourceGroupName
 $resourceGroupNames = $resourceGroups | Where-Object { $_.ResourceGroupName -match $args1 }
 
 Write-Host "Liste des RG ou les ressources seront supprimés:"
