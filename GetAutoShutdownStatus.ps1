@@ -9,10 +9,10 @@
 # [ ] Exclude devtestlab resources
 
 $vmliststatus = @()
+$subscriptionId = az account show --query id --output tsv
 
 foreach ($vm in Get-AzVm){
     try  {
-        $subscriptionId = ($vm.Id -split "/")[2]
         $shutdownresource = Get-AzResource `
                 -ResourceId "/subscriptions/$subscriptionId/resourceGroups/$($vm.ResourceGroupName)/providers/microsoft.devtestlab/schedules/shutdown-computevm-$($vm.Name)" `
                 -ErrorAction Stop
