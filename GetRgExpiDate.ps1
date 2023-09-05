@@ -31,4 +31,4 @@ foreach ($rg in $rgs){
 }
 }
 
-$rgTags
+$rgTags | Select-Object -Property RgName, Owner, Approver, EndDate
