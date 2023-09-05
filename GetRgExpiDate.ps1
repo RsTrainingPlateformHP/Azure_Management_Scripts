@@ -21,6 +21,6 @@ foreach ($rg in $rgs){
         "RgName" = $rg.Name
         "Tags"   = "None"
     
-    }
-    
+    }  
+}
 }
