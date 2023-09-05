@@ -36,10 +36,12 @@ foreach($vm in $vms)
 
 $LogsReport = $LogsReport | Select-Object -Property *, @{Name="Hash";Expression={$_ | Out-String}} | Sort-Object -Property Hash -Unique | Select-Object -Property * -ExcludeProperty Hash
 $nowDate = Get-Date -Format "dd-MM-yyyy"
-if ($args1 -eq "CSV")
-{
-    $LogsReport | Export-Csv "report-$nowDate.csv"
+if ($LogsReport){
+    if ($args1 -eq "CSV"){
+        $LogsReport | Export-Csv "report-$nowDate.csv"
+    }else{
+        $LogsReport
+    }
 }else{
-    write-Host $LogsReport
+    write-host "No logs to display"
 }
-
