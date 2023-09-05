@@ -12,12 +12,12 @@ foreach ($rg in $rgs){
     $tags = Get-AzTag -ResourceId $rg.ResourceId
     if ($tags) {
         $rgTags += New-Object psobject -Property @{
-            "RgName" = $rg.Name
+            "RgName" = $rg.ResourceGroupName
             "Tags"   = $tags.Properties.TagsProperty
         }
     }else{
     $rgTags += New-Object psobject -Property @{
-        "RgName" = $rg.Name
+        "RgName" = $rg.ResourceGroupName
         "Tags"   = "None"
     
     }  
