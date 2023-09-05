@@ -11,16 +11,21 @@ foreach ($rg in $rgs){
 
     $tags = Get-AzTag -ResourceId $rg.ResourceId
     if ($tags) {
-        
+        if ($tags.Properties.TagsProperty.owner){$owner=$tags.Properties.TagsProperty.owner}else{$owner="None"}
+        if ($tags.Properties.TagsProperty.approver){$approver=$tags.Properties.TagsProperty.approver}else{$approver="None"}
+        if ($tags.Properties.TagsProperty.endDate){$endDate=$tags.Properties.TagsProperty.endDate}else{$endDate="None"}
         $rgTags += New-Object psobject -Property @{
-            "RgName" = $rg.ResourceGroupName
-            "Owner"  = $tags.Properties.TagsProperty.owner
-            "Tags"   = $tags.Properties.TagsProperty
+            "RgName"   = $rg.ResourceGroupName
+            "Owner"    = $owner
+            "Approver" = $approver
+            "EndDate"  = $endDate
         }
     }else{
     $rgTags += New-Object psobject -Property @{
-        "RgName" = $rg.ResourceGroupName
-        "Tags"   = "None"
+        "RgName"   = $rg.ResourceGroupName
+        "Owner"    = "None"
+        "Approver" = "None"
+        "EndDate"  = "None"
     
     }  
 }
