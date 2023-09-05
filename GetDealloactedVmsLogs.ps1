@@ -17,19 +17,28 @@ foreach($vm in $vms)
     write-progress -Activity 'Processing Vms' -Status "Processing $($counter) of $($vms.count) - ($($vm.Name))" -CurrentOperation $vm -PercentComplete (($counter / $vms.count)*100)
     
     $logs = Get-AzLog -StartTime $MonthAgoDdate -DetailedOutput -ResourceId $vm.Id -WarningAction 0| Where-Object {$_.Authorization.Action -like 'Microsoft.Compute/virtualMachines/deallocate/action*'}
-    foreach ($log in $logs)
-    {
-        $date = $log.EventTimestamp -split " "
-        $date = $date[0] -split "/"
-        $date = "$($date[1])/$($date[0])/$($date[2])"
-        $LogsReport += New-Object psobject -Property @{
-            "VMName" = $vm.Name
-            "VMId" = $vm.Id
-            "VMSize" = $vm.HardwareProfile.VmSize
-            "OperationName" = $log.OperationName
-            "LogTimeStamp" = $date
-
+    if ($logs){
+        foreach ($log in $logs)
+        {
+            $date = $log.EventTimestamp -split " "
+            $date = $date[0] -split "/"
+            $date = "$($date[1])/$($date[0])/$($date[2])"
+            $LogsReport += New-Object psobject -Property @{
+                "VMName" = $vm.Name
+                "VMId" = $vm.Id
+                "VMSize" = $vm.HardwareProfile.VmSize
+                "OperationName" = $log.OperationName
+                "LogTimeStamp" = $date
+    
+            }
         }
+    }else{
+        $LogsReport += New-Object psobject -Property @{
+                    "VMName" = $vm.Name
+                    "VMId" = $vm.Id
+                    "VMSize" = $vm.HardwareProfile.VmSize
+                    "OperationName" = "No logs from more than 1 month"
+                    "LogTimeStamp" = "30d+"
     }
 }
 
