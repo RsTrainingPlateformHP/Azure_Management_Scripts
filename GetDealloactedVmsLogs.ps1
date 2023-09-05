@@ -40,6 +40,6 @@ if ($args1 -eq "CSV")
 {
     $LogsReport | Export-Csv "report-$nowDate.csv"
 }else{
-    $LogsReport
+    write-Host $LogsReport
 }
 
