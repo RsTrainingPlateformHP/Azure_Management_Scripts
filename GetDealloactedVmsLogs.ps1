@@ -18,6 +18,17 @@ foreach($vm in $vms)
     
     $logs = Get-AzLog -StartTime $MonthAgoDdate -DetailedOutput -ResourceId $vm.Id -WarningAction 0| Where-Object {$_.Authorization.Action -like 'Microsoft.Compute/virtualMachines/deallocate/action*'}
 
+    if($vm.Tags["owner"]){
+        $owner = $vm.Tags["owner"]
+    }else{
+        $rg = Get-AzResourceGroup -Name $vm.ResourceGroupName
+        if ($rg.Tags["owner"]){
+            $owner = $rg.Tags["owner"]
+        }else{
+            $owner = "None"
+        }
+    }
+
     if ($logs){
         foreach ($log in $logs)
         {
@@ -30,7 +41,7 @@ foreach($vm in $vms)
                 "VMSize" = $vm.HardwareProfile.VmSize
                 "OperationName" = $log.OperationName
                 "LogTimeStamp" = $date
-                "Owner_tag" = if($vm.Tags["owner"]){$vm.Tags["owner"]}else{"None"}
+                "Owner_tag" = $owner
     
             }
         }
@@ -41,7 +52,7 @@ foreach($vm in $vms)
                     "VMSize" = $vm.HardwareProfile.VmSize
                     "OperationName" = "None"
                     "LogTimeStamp" = "30d+"
-                    "Owner_tag" = if($vm.Tags["owner"]){$vm.Tags["owner"]}else{"None"}
+                    "Owner_tag" = $owner
                 }
     }
 }
