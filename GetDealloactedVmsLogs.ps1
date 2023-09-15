@@ -18,10 +18,11 @@ foreach($vm in $vms)
     
     $logs = Get-AzLog -StartTime $MonthAgoDdate -DetailedOutput -ResourceId $vm.Id -WarningAction 0| Where-Object {$_.Authorization.Action -like 'Microsoft.Compute/virtualMachines/deallocate/action*'}
 
-    if($vm.Tags["owner"]){
-        $owner = $vm.Tags["owner"]
+    $rg = Get-AzResourceGroup -Name $vm.ResourceGroupName
+    if ($rg.Tags["owner"]){
+        $owner = $rg.Tags["owner"]
     }else{
-            $owner = "None"
+        $owner = "None"
     }
 
     if ($logs){
