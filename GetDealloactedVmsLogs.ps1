@@ -17,6 +17,11 @@ foreach($vm in $vms)
     write-progress -Activity 'Processing Vms' -Status "Processing $($counter) of $($vms.count) - ($($vm.Name))" -CurrentOperation $vm -PercentComplete (($counter / $vms.count)*100)
     
     $logs = Get-AzLog -StartTime $MonthAgoDdate -DetailedOutput -ResourceId $vm.Id -WarningAction 0| Where-Object {$_.Authorization.Action -like 'Microsoft.Compute/virtualMachines/deallocate/action*'}
+    if ($null -ne $vm.Tags -and $mv.Tags.ContainsKey("owner")){
+        $owner = $vm.Tags["owner"]
+    }else{
+        $owner = "None"
+    }
     if ($logs){
         foreach ($log in $logs)
         {
@@ -29,17 +34,18 @@ foreach($vm in $vms)
                 "VMSize" = $vm.HardwareProfile.VmSize
                 "OperationName" = $log.OperationName
                 "LogTimeStamp" = $date
+                "Owner tag" = $owner
     
             }
         }
     }else{
-        write-host $vm.tags
         $LogsReport += New-Object psobject -Property @{
                     "VMName" = $vm.Name
                     "VMId" = $vm.Id
                     "VMSize" = $vm.HardwareProfile.VmSize
                     "OperationName" = "No logs from more than 1 month"
                     "LogTimeStamp" = "30d+"
+                    "Owner tag" = $owner
                 }
     }
 }
