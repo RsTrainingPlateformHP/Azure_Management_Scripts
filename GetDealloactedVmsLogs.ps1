@@ -33,6 +33,7 @@ foreach($vm in $vms)
             }
         }
     }else{
+        write-host $vm.tags
         $LogsReport += New-Object psobject -Property @{
                     "VMName" = $vm.Name
                     "VMId" = $vm.Id
