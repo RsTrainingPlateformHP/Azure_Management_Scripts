@@ -62,7 +62,7 @@ $LogsReport = $LogsReport | Select-Object -Property *, @{Name="Hash";Expression=
 $nowDate = Get-Date -Format "dd-MM-yyyy"
 if ($LogsReport){
     if ($args1 -eq "CSV"){
-        $LogsReport | Export-Csv "report-$nowDate.csv"
+        $LogsReport | Export-Csv "report-deallocatedVMs-$nowDate.csv"
     }else{
         $LogsReport | Select-Object -Property VMName, VMSize, LogTimeStamp, OperationName, Owner_tag | Format-Table
     }
