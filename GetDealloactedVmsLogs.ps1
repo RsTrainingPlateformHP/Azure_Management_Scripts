@@ -30,7 +30,7 @@ foreach($vm in $vms)
                 "VMSize" = $vm.HardwareProfile.VmSize
                 "OperationName" = $log.OperationName
                 "LogTimeStamp" = $date
-                "Owner tag" = if($vm.Tags["owner"]){$vm.Tags["owner"]}else{"None"}
+                "Owner_tag" = if($vm.Tags["owner"]){$vm.Tags["owner"]}else{"None"}
     
             }
         }
@@ -41,7 +41,7 @@ foreach($vm in $vms)
                     "VMSize" = $vm.HardwareProfile.VmSize
                     "OperationName" = "No logs from more than 1 month"
                     "LogTimeStamp" = "30d+"
-                    "Owner tag" = if($vm.Tags["owner"]){$vm.Tags["owner"]}else{"None"}
+                    "Owner_tag" = if($vm.Tags["owner"]){$vm.Tags["owner"]}else{"None"}
                 }
     }
 }
@@ -53,7 +53,7 @@ if ($LogsReport){
     if ($args1 -eq "CSV"){
         $LogsReport | Export-Csv "report-$nowDate.csv"
     }else{
-        $LogsReport | Select-Object -Property VMName, VMSize, LogTimeStamp, OperationName
+        $LogsReport | Select-Object -Property VMName, VMSize, LogTimeStamp, OperationName, Owner_tag
     }
 }else{
     write-host "No logs to display"
