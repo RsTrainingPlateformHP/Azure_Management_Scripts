@@ -21,12 +21,7 @@ foreach($vm in $vms)
     if($vm.Tags["owner"]){
         $owner = $vm.Tags["owner"]
     }else{
-        $rg = Get-AzResourceGroup -Name $vm.ResourceGroupName
-        if ($rg.Tags["owner"]){
-            $owner = $rg.Tags["owner"]
-        }else{
             $owner = "None"
-        }
     }
 
     if ($logs){
