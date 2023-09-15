@@ -17,7 +17,7 @@ foreach($vm in $vms)
     write-progress -Activity 'Processing Vms' -Status "Processing $($counter) of $($vms.count) - ($($vm.Name))" -CurrentOperation $vm -PercentComplete (($counter / $vms.count)*100)
     
     $logs = Get-AzLog -StartTime $MonthAgoDdate -DetailedOutput -ResourceId $vm.Id -WarningAction 0| Where-Object {$_.Authorization.Action -like 'Microsoft.Compute/virtualMachines/deallocate/action*'}
-    if ($null -ne $vm.Tags -and $mv.Tags.ContainsKey("owner")){
+    if ($vm.Tags -ne $null -and $mv.Tags.ContainsKey("owner")){
         $owner = $vm.Tags["owner"]
     }else{
         $owner = "None"
