@@ -53,7 +53,7 @@ if ($LogsReport){
     if ($args1 -eq "CSV"){
         $LogsReport | Export-Csv "report-$nowDate.csv"
     }else{
-        $LogsReport | Select-Object -Property VMName, VMSize, LogTimeStamp, OperationName, Owner_tag
+        $LogsReport | Select-Object -Property VMName, VMSize, LogTimeStamp, OperationName, Owner_tag | Format-Table
     }
 }else{
     write-host "No logs to display"
