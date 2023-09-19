@@ -17,11 +17,9 @@ param
 
 function GetPublicIP ($VMName) {
      $publicIPs = Get-AzPublicIpAddress | where-object -Property Name -Match "$VMName"
-
-     Write-Output 'Resource Group,Public IP Name,Public IP Address'
      
      foreach($publicIP in $publicIPs) {
-          Write-Output "$($publicIP.ResourceGroupName),$($publicIP.Name),$($publicIP.IpAddress)"
+          $publicIP
          }
 }
 
