@@ -17,7 +17,7 @@ param
 
 function GetPublicIP ($VMName) {
      $publicIPs = Get-AzPublicIpAddress | where-object -Property Name -Match "$VMName"
-     $publicIP | Select-Object -Property Name, PublicIpAllocationMethod, IpAddress |Format-Table 
+     $publicIPs | Select-Object -Property Name, PublicIpAllocationMethod, IpAddress |Format-Table 
 }
 
 $nowDate = Get-Date -Format "dd-MM-yyyy"
