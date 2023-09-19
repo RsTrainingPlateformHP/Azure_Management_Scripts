@@ -1,11 +1,11 @@
 # =======================================================
 # NAME: GetVmPublicIp.ps1
-# AUTHOR: FAVROT, Jean-Baptiste, Entreprise
-# DATE: 31/05/2022
+# AUTHOR: LEGOUPIL, Clément, Entreprise
+# DATE: 19/09/2023
 #
-# Lists all VMs with corresponding public IPs. Takes a string with the name of the VMs you want to match in input
+# Lists all public IPs. Takes a string with the name of the VMs you want to match in input
 #
-# Usage : ./GetVmPublicIp.ps1 "splunk" "splunkPubIps" --> output : splunkPubIps.csv
+# Usage : ./GetVmPublicIp.ps1 -VmName "splunk" -export "splunkPubIps" --> output : splunkPubIps.csv
 #
 # =======================================================
 
