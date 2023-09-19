@@ -19,7 +19,7 @@ function GetPublicIP ($VMName) {
      $publicIPs = Get-AzPublicIpAddress | where-object -Property Name -Match "$VMName"
      
      foreach($publicIP in $publicIPs) {
-          $publicIP
+          $publicIP.Name, $publicIP.PublicIpAllocationMethod, $publicIP.IpAddress
          }
 }
 
