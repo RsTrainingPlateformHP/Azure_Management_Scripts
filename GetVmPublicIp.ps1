@@ -12,7 +12,7 @@
 param 
 (
      [string]$VMName,
-     [string]$CSV
+     [string]$export
 )
 
 function GetPublicIP ($VMName) {
@@ -22,7 +22,7 @@ function GetPublicIP ($VMName) {
 
 $nowDate = Get-Date -Format "dd-MM-yyyy"
 
-if ($CSV -eq "CSV"){
+if ($export -eq "CSV"){
      GetPublicIP($VMName) | Out-File -FilePath ".\pubIpsreport-$nowDate-.csv" -NoClobber
 }else{
      GetPublicIP($VMName)
