@@ -24,6 +24,4 @@ foreach ($rg in $Rgs){
 }
 
 write-host "$($Rgs.count) Resource groups has been deleted."
-#Remove-AzResource -ResourceId 
 
-#/subscriptions/a4038696-ce0f-492d-9049-38720738d4fe/resourceGroups/Training_Labs-TP-CIS-Win042-972040
