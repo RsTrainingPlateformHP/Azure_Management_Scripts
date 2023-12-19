@@ -18,7 +18,7 @@ param(
 $resourceGroups = Get-AzResourceGroup | Select-Object ResourceGroupName
 $resourceGroupNames = $resourceGroups | Where-Object { $_.ResourceGroupName -match $args1 }
 
-Write-Host "Resource Groups that will be deleted:"
+Write-Host "Resources will be deleted in those Resource groups:"
 $resourceGroupNames.ResourceGroupName
 
 # On check les RG et on Continue/Stop le script
