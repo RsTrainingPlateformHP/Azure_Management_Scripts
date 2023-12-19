@@ -25,6 +25,6 @@ foreach ($user in $users) {
 
 # Afficher les utilisateurs par groupe de ressources
 foreach ($group in $groupedUsers.Keys) {
-    Write-Host "Utilisateurs dans le groupe de ressources $group:"
+    Write-Host "Utilisateurs dans le groupe de ressources $($group):"
     $groupedUsers[$group] | Format-Table UserPrincipalName, DisplayName
 }
