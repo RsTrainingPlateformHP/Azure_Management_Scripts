@@ -1,32 +1,30 @@
 # =======================================================
 # NAME: GetVmPublicIp.ps1
-# AUTHOR: FAVROT, Jean-Baptiste, Entreprise
-# DATE: 31/05/2022
+# AUTHOR: LEGOUPIL, Clément, Entreprise
+# DATE: 19/09/2023
 #
-# Lists all VMs with corresponding public IPs. Takes a string with the name of the VMs you want to match in input
+# Lists all public IPs. Takes a string with the name of the VMs you want to match in input
 #
-# Usage : ./GetVmPublicIp.ps1 "splunk" "splunkPubIps" --> output : splunkPubIps.csv
+# Usage : ./GetVmPublicIp.ps1 -VmName "splunk" -export "splunkPubIps" --> output : splunkPubIps.csv
 #
 # =======================================================
 
 param 
 (
      [string]$VMName,
-     [string][Parameter(Mandatory)]$OutputName
+     [string]$export
 )
 
 function GetPublicIP ($VMName) {
      $publicIPs = Get-AzPublicIpAddress | where-object -Property Name -Match "$VMName"
-
-     Write-Output 'Resource Group,Public IP Name,Public IP Address'
-     
-     foreach($publicIP in $publicIPs) {
-          Write-Output "$($publicIP.ResourceGroupName),$($publicIP.Name),$($publicIP.IpAddress)"
-         }
+     $publicIPs | Select-Object -Property Name, PublicIpAllocationMethod, IpAddress |Format-Table 
 }
 
+$nowDate = Get-Date -Format "dd-MM-yyyy"
 
+if ($export -eq "CSV"){
+     GetPublicIP($VMName) | Out-File -FilePath ".\pubIpsreport-$nowDate-.csv" -NoClobber
+}else{
+     GetPublicIP($VMName)
+}
 
-GetPublicIP($VMName) | Out-File -FilePath ".\$OutputName.csv" -NoClobber
-
-cat "$OutputName.csv"
